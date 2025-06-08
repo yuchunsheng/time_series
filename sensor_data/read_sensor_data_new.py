@@ -1,10 +1,31 @@
 import pandas as pd
 import os
-
+import io
 # Define the path to the data file
 # Assuming the script is in D:\deeplearnig_data\PIR_sensor_data\csh101
 # If the script is elsewhere, you'll need to provide the full absolute path to the .txt file
 file_path = r"D:\deeplearnig_data\PIR_sensor_data\csh102\csh102.rawdata.txt"
+# In a real-world scenario, you would load your data from a file, for example:
+# df = pd.read_csv('your_sensor_data.csv')
+
+# # For this example, we'll recreate a sample of your DataFrame from the provided text.
+# # Note: The original 'Timestamp' column seems to be a combination of 'Date' and 'Time'.
+# # We will assume a single 'Timestamp' column exists for simplicity, as shown in your example output.
+# data = """Timestamp,SensorID,Attribute1,Attribute2,Value,SensorType
+# 2011-06-15 00:06:32.834414,M021,Bedroom,Bed,ON,Control4-Motion
+# 2011-06-15 00:06:33.988964,M021,Bedroom,Bed,OFF,Control4-Motion
+# 2011-06-15 00:15:01.957718,LS013,Ignore,Ignore,6,Control4-LightSensor
+# 2011-06-15 00:25:01.892474,LS013,Ignore,Ignore,7,Control4-LightSensor
+# 2011-06-15 03:37:46.585185,M021,Bedroom,Bed,ON,Control4-Motion
+# """
+
+# # Use io.StringIO to read the string data as if it were a file
+# df = pd.read_csv(io.StringIO(data))
+
+# # Ensure the 'Timestamp' column is treated as a proper datetime object,
+# # which is crucial for time-based indexing and sorting.
+# df['Timestamp'] = pd.to_datetime(df['Timestamp'])
+
 
 def load_data_to_dataframe(path_to_file):
     """
